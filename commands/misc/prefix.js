@@ -1,9 +1,9 @@
 module.exports = {
-    name: "test",
-    category: "info",
+    name: "prefix",
+    category: "misc",
     permissions: [],
     devOnly: false,
     run: async ({client, message, args}) => {
-        message.reply("working")
+        message.reply(`The prefix for ${message.guild} is ${prefix}`)
     }
 }

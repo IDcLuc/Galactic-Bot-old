@@ -17,7 +17,7 @@ let bot = {
 
 const welcomeChannelId = "953691364485365821"
 
-client.on("guildMemberAd", (member) => {
+client.on("guildMemberAdd", (member) => {
     member.guild.channels.cache.get(welcomeChannelId).send(`Hey, <@${member.id}>! Welcome to the server, please make sure to read the rules before chatting!`)
 })
 

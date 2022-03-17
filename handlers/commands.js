@@ -17,4 +17,4 @@ module.exports = (bot, reload) => {
         })
     }) 
     console.log(`Loaded ${client.commands.size} commands`)
-}
+} 

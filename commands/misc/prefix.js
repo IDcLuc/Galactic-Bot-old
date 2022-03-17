@@ -4,6 +4,6 @@ module.exports = {
     permissions: [],
     devOnly: false,
     run: async ({client, message, args}) => {
-        message.reply(`The prefix for ${message.guild} is ${prefix}`)
+        message.reply(`The prefix for **${message.guild}** is *``g!``*.`)
     }
 }

@@ -12,7 +12,7 @@ module.exports = {
                 .setTitle('Help')
                 .setDescription(`The prefix for **${message.guild}** is **"g!"**.`)
                 .addFields(
-                    { name: "Misc", value: "help, ping" }
+                    { name: "Misc", value: "help, ping, prefix" }
                 )
         message.reply({ embeds: [embed] })
     }

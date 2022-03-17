@@ -32,4 +32,4 @@ client.loadCommands(bot, false)
 
 module.exports = bot
 
-client.login(process.env.TOKEN)
+client.login(process.env.KEY)

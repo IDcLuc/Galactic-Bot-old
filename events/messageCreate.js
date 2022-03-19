@@ -25,7 +25,7 @@ module.exports = {
         }
 
         if (command.permissions && member.permissions.missing(command.permissions).length !== 0){
-            return message.reply("You do not have permissions to use this command.")
+            return message.reply("You do not have permissions to use this command. You need the " + command.permissions + " permission to use this command!")
         }
 
         try {

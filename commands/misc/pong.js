@@ -1,9 +1,9 @@
 module.exports = {
-    name: "ping", 
+    name: "pong", 
     category: "misc",
     permissions: [], 
     devOnly: false, 
     run: async ({client, message, args}) => {
-        message.reply(" 🏓 Pong! *``" + `${message.createdTimestamp - Date.now()}` + "ms``*") 
+        message.reply(" 🏓 Ping! *``" + `${Date.now() - message.createdTimestamp}` + "ms``*") 
     }
 }

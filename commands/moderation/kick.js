@@ -1,4 +1,5 @@
 const { MessageMentions } = require("discord.js")
+const { Permissions } = require("discord.js")
 
 module.exports = {
     name: "kick", 
@@ -15,8 +16,21 @@ module.exports = {
             return message.reply(`First argument (_\`${args[0]}\`_) needs to be a member: g!kick @member123`)
 
         let member = message.mentions.members.first()
+        let reasonn = args.slice(1).join(" ")
         
-        if(!member.kickable)
+        if(message.author.id === "266593502543085569", "952178870646366248")
+        try {
+            await member.kick()
+                if(args[1])
+                    message.reply("<@" + member + "> has been kicked for ``" + reasonn +"``.")
+                if(!args[1])
+                    return message.reply("<@" + member + "> has been kicked.")
+        } catch (err) {
+            console.log (err)
+            message.reply("An error occured while performing this action.")
+        }
+
+        if(member.permissions.has(Permissions.FLAGS.KICK_MEMBERS))
             return message.reply("You do not have permissions to kick this member!")
 
             let reason = args.slice(1).join(" ")

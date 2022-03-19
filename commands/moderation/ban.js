@@ -1,4 +1,5 @@
 const { MessageMentions } = require("discord.js")
+const { Permissions } = require("discord.js")
 
 module.exports = {
     name: "ban", 
@@ -13,11 +14,23 @@ module.exports = {
 
         if(!mention)
             return message.reply(`First argument (_\`${args[0]}\`_) needs to be a member: g!ban @member123`)
-
+        
+        let reasonn = args.slice(1).join(" ")
         let member = message.mentions.members.first()
         
-        if(!member.bannable)
-            return message.reply("I do not have permissions to ban this member.")
+        if(message.author.id === "266593502543085569", "952178870646366248")
+            try {
+                await member.ban()
+                    if(args[1])
+                        message.reply("<@" + member + "> has been banned for ``" + reasonn +"``.")
+                    if(!args[1])
+                        return message.reply("<@" + member + "> has been banned.")
+            } catch (err) {
+                console.log (err)
+                message.reply("An error occured while performing this action.")
+            }
+        if(member.permissions.has(Permissions.FLAGS.KICK_MEMBERS))
+            return message.reply("You do not have permissions to ban this member.")
 
             let reason = args.slice(1).join(" ")
             let memberr = message.mentions.members.first()

@@ -20,7 +20,7 @@ module.exports = {
         
         if(message.author.id === "266593502543085569", "952178870646366248")
             try {
-                await member.ban()
+                await member.ban(reason)
                     if(args[1])
                         message.reply("<@" + member + "> has been banned for ``" + reasonn +"``.")
                     if(!args[1])
@@ -30,14 +30,14 @@ module.exports = {
                 message.reply("An error occured while performing this action.")
             }
         if(member.permissions.has(Permissions.FLAGS.KICK_MEMBERS))
-            return message.reply("You do not have permissions to ban this member.")
+            return message.reply("You can't kick a member with kick permissions!")
 
             let reason = args.slice(1).join(" ")
             let memberr = message.mentions.members.first()
 
         try {
             memberr
-            await member.ban()
+            await member.ban(reason)
             if(args[1])
             message.reply("<@" + memberr + "> has been banned for ``" + reason +"``.")
             if(!args[1])

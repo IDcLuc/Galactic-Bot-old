@@ -1,5 +1,6 @@
-const { MessageMentions } = require("discord.js")
+const { MessageMentions, MessageReaction } = require("discord.js")
 const { Permissions } = require("discord.js")
+const { MessageEmbed, Guild } = require("discord.js")
 
 module.exports = {
     name: "kick", 
@@ -7,9 +8,19 @@ module.exports = {
     permissions: ["KICK_MEMBERS"], 
     devOnly: false, 
     run: async ({client, message, args}) => {
-        if (!args[0])
-            return message.reply("Please specify who you would like to kick: g!kick @member123")
-
+        if (!args[0]){
+            let embede = new MessageEmbed()
+            embede 
+                .setTitle("Kick")
+                .setDescription("Kick a member from the discord server.")
+                .setColor("#863b87")
+                .addFields(
+                    { name: "Usage", value: "g!kick [member] [reason]"},
+                    { name: "Example", value: "g!kick <@453943223229087748> Bullying"}
+                )
+                .setFooter({ text: "Galactic Bot by IDcLuc", iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+            return message.reply({ embeds: [embede] })
+        }
         let mention = args[0].match(MessageMentions.USERS_PATTERN)
 
         if(!mention)
@@ -20,7 +31,7 @@ module.exports = {
         
         if(message.author.id === "266593502543085569", "952178870646366248")
         try {
-            await member.kick()
+            await member.kick(reason)
                 if(args[1])
                     message.reply("<@" + member + "> has been kicked for ``" + reasonn +"``.")
                 if(!args[1])
@@ -31,13 +42,13 @@ module.exports = {
         }
 
         if(member.permissions.has(Permissions.FLAGS.KICK_MEMBERS))
-            return message.reply("You do not have permissions to kick this member!")
+            return message.reply("You can't kick a member with kick permissions!")
 
             let reason = args.slice(1).join(" ")
             let memberr = message.mentions.members.first()
 
         try {
-            await member.kick()
+            await member.kick(reason)
             if(args[1])
             message.reply("<@" + memberr + "> has been kicked for ``" + reason +"``.")
             if(!args[1])

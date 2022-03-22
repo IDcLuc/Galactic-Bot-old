@@ -1,4 +1,4 @@
-const { MessageMentions, MessageReaction } = require("discord.js")
+const { MessageMentions } = require("discord.js")
 const { Permissions } = require("discord.js")
 const { MessageEmbed, Guild } = require("discord.js")
 

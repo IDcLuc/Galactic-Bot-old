@@ -29,24 +29,13 @@ module.exports = {
         let member = message.mentions.members.first()
         let reasonn = args.slice(1).join(" ")
         
-        if(message.author.id === "266593502543085569", "952178870646366248"){
-            try {
-                await member.kick(reasonn)
-                    if(args[1])
-                        message.reply("<@" + member + "> has been kicked for ``" + reasonn +"``.")
-                    if(!args[1])
-                        return message.reply("<@" + member + "> has been kicked.")
-            } catch (err) {
-                console.log (err)
-                message.reply("An error occured while performing this action.")
-            }
+        if(member.permissions.has(Permissions.FLAGS.KICK_MEMBERS)){
+            if(!member.permissions.has(Permissions.FLAGS.ADMINISTRATOR))
+                return message.reply(`You can't kick ${member.name} as they have kick permissions.`)
         }
-        if(member.permissions.has(Permissions.FLAGS.KICK_MEMBERS))
-            return message.reply("You can't kick a member with kick permissions!")
 
             let reason = args.slice(1).join(" ")
             let memberr = message.mentions.members.first()
-
         try {
             await member.kick(reason)
             if(args[1])

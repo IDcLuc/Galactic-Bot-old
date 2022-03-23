@@ -42,6 +42,7 @@ module.exports = {
                 .setFooter({ text: "Galactic Bot by IDcLuc", iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
             
             let muteembed = new MessageEmbed()
+            muteembed
                 .setTitle("Mute")
                 .setDescription("Mute a member from the discord server.")
                 .setColor("#863b87")
@@ -50,15 +51,27 @@ module.exports = {
                     { name: "Example", value: "g!mute <@453943223229087748> Excessive usage of bad words"}
                 )
                 .setFooter({ text: "Galactic Bot by IDcLuc", iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+            
             let pingembed = new MessageEmbed()
+            pingembed
                 .setTitle("ping")
-                .setDescription("Shows the response time of the bot.")
+                .setDescription("Shows the response time/latency of the bot API.")
                 .setColor("#863b87")
                 .addFields(
                     { name: "Usage", value: "g!ping"},
                     { name: "Alias", value: "g!pong"}
                 )
                 .setFooter({ text: "Galactic Bot by IDcLuc", iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+
+            let prefixembed = new MessageEmbed()
+            .setTitle("ping")
+            .setDescription("Shows the prefix of the bot for this server.")
+            .setColor("#863b87")
+            .addFields(
+                { name: "Usage", value: "g!prefix"},
+                { name: "Alias", value: "g!pref"}
+            )
+            .setFooter({ text: "Galactic Bot by IDcLuc", iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
 
         switch(cmdname){
             case ("kick"):
@@ -72,6 +85,12 @@ module.exports = {
             break;
             case ("ping"):
                 message.reply({ embeds: [pingembed] })
+            break;
+            case ("prefix"):
+                message.reply({ embeds: [prefixembed] })
+            break;
+            case ('pref'):
+                message.reply({ embeds: [embed] })
             break;
             case ("pong"):
                 message.reply({ embeds: [ping] })

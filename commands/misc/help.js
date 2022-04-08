@@ -12,10 +12,10 @@ module.exports = {
             defaultembed
                 .setColor('#863b87')
                 .setTitle('Help')
-                .setDescription(`The prefix for **${message.guild}** is **"g!"**. Use g!help [command] to get info about a specific command.`)
+                .setDescription(`The prefix for **${message.guild.name}** is **"g!"**. Use g!help [command] to get info about a specific command.`)
                 .addFields(
                     { name: "Misc", value: "help, ping, pong, prefix" },
-                    {name : "Moderation", value: "kick, ban, mute"}
+                    { name : "Moderation", value: "kick, ban, mute"}
                 )
                 .setFooter({ text: "Galactic Bot by IDcLuc", iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
  

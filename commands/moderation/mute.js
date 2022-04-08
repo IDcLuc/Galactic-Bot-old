@@ -45,10 +45,16 @@ module.exports = {
         }
         let memberr = message.mentions.members.first()
 
-        if(memberr.permissions.has(Permissions.FLAGS.KICK_MEMBERS))
-            return message.reply("You can't mute a person with kick permissions!")
+        if(member.permissions.has(Permissions.FLAGS.KICK_MEMBERS) && !member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)){
+            return message.reply(`You can't mute \`\`${member.user.username}\`\` as they have kick permissions.`)
+        }
 
+            let reason = args.slice(1).join(" ")
         try {
+            if(args[1])
+            await memberr.send(`You have been muted from **${message.guild.name}** for *\`\`${reason}\`\`*!`)
+            else if(!args[1])
+            await memberr.send(`You have been muted from **${message.guild.name}**!`)
             await member.roles.add("Muted")
                 if(args[1])
                     message.reply("<@" + member + "> has been muted for ``" + reasonn +"``.")

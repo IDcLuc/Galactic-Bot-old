@@ -2,7 +2,7 @@ const { MessageMentions } = require("discord.js")
 const { MessageEmbed } = require("discord.js")
 
 module.exports = {
-    name: "namemc" && "nmc",
+    name: "skycrypt" && "sb" && "stats",
     category: "search",
     permissions: [],
     devOnly: false,
@@ -11,12 +11,13 @@ module.exports = {
             let embed = new MessageEmbed()
             embed
                 .setTitle("namemc")
-                .setDescription("Searches a username on NameMC.")
+                .setDescription("Sends a link to the SkyCrypt page for the username requested.")
                 .setColor("#863b87")
                 .addFields(
-                    { name: "Usage", value: "g!namemc [username]"},
-                    { name: "Example", value: "g!namemc MajorX500"},
-                    { name: "Alias", value: "g!nmc"}
+                    { name: "Usage", value: "g!skycrypt [username]"},
+                    { name: "Example", value: "g!skycrypt MajorX500"},
+                    { name: "Alias", value: "g!sb, g!stats"},
+                    { name: "Example", value: "g!skycrypt MajorX500, g!sb IDcLuc, g!stats"}
                 )
                 .setFooter({ text: "Galactic Bot by IDcLuc", iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
             return message.reply({ embeds: [embed] })            

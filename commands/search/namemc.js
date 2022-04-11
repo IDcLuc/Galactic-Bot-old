@@ -2,7 +2,7 @@ const { MessageMentions } = require("discord.js")
 const { MessageEmbed } = require("discord.js")
 
 module.exports = {
-    name: "namemc" && "nmc",
+    name: "namemc",
     category: "search",
     permissions: [],
     devOnly: false,
@@ -10,15 +10,15 @@ module.exports = {
         if (!args[0]){
             let embed = new MessageEmbed()
             embed
-                .setTitle("namemc")
+                .setTitle("NameMC")
                 .setDescription("Searches a username on NameMC.")
                 .setColor("#863b87")
                 .addFields(
                     { name: "Usage", value: "g!namemc [username]"},
-                    { name: "Example", value: "g!namemc MajorX500"},
-                    { name: "Alias", value: "g!nmc"}
+                    { name: "Alias", value: "g!nmc"},
+                    { name: "Example", value: "g!namemc MajorX500"}
                 )
-                .setFooter({ text: "Galactic Bot by IDcLuc", iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+                .setFooter({ text: `Galactic Bot by IDcLuc ● Requested by ${message.author}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
             return message.reply({ embeds: [embed] })            
         }
         

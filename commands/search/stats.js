@@ -2,7 +2,7 @@ const { MessageMentions } = require("discord.js")
 const { MessageEmbed } = require("discord.js")
 
 module.exports = {
-    name: "skycrypt",
+    name: "stats",
     category: "search",
     permissions: [],
     devOnly: false,

@@ -11,7 +11,7 @@ const client = new Discord.Client({
 
 let bot = {
     client,
-    prefix: "g!",
+    prefix: "g!" || "G!",
     owners: ["495514555615543329"]
 }
 

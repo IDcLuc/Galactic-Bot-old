@@ -18,7 +18,7 @@ module.exports = {
                     { name: "Usage", value: "g!kick [member] [reason]"},
                     { name: "Example", value: "g!kick <@453943223229087748> Bullying"}
                 )
-                .setFooter({ text: `Galactic Bot by IDcLuc ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
             return message.reply({ embeds: [embede] })
         }
         let mention = args[0].match(MessageMentions.USERS_PATTERN)

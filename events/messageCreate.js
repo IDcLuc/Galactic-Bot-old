@@ -9,7 +9,7 @@ module.exports = {
         
         if (message.author.bot) return
 
-        if (!message.content.startsWith(prefix))
+        if (!message.content.startsWith(prefix || "G!"))
             return
 
         const args = message.content.slice(prefix.length).trim().split(/ +/g)

@@ -14,7 +14,7 @@ module.exports = {
                 .setTitle('Help')
                 .setDescription(`The prefix for **${message.guild.name}** is **"g!"**. Use g!help [command] to get info about a specific command.`)
                 .addFields(
-                    { name: "Misc", value: "help, ping, pong, prefix" },
+                    { name: "Misc", value: "help, ping, prefix" },
                     { name: "Moderation", value: "kick, ban, mute"},
                     { name: "Fun", value: "confirmbald, fax, golden"},
                     { name: "Search", value: "namemc, skycrypt"},

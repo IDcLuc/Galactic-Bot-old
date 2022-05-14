@@ -4,7 +4,7 @@ module.exports = {
     permissions: [], 
     devOnly: false, 
     run: async ({client, message, args}) => {
-        message.reply("🏓 Pong! *``" + `${message.createdTimestamp - Date.now()}` + "ms``*") 
+        message.reply("🏓 Pong! *``" + `${message.createdTimestamp - Date.now()}` + "ms``*")
     }
 }
 

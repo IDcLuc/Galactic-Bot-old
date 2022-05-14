@@ -1,6 +1,6 @@
 const { MessageEmbed } =  require('discord.js')
-const temp = require('hypixel-api-reborn');
-const hypixelAPI = new temp.Client("8477c865-dfca-4354-b32c-3a78e8c24f3e");
+const hypixel = require('../../hypixelapi');
+const fetch = require('node-fetch')
 
 module.exports = {
     name: "sw",
@@ -8,14 +8,19 @@ module.exports = {
     permissions: [],
     devOnly: false,
     run: async ({client, message, args}) => {
-        let player = args[0];
+        let plr = args[0];
 
-        if (!player)
+        if (!plr)
             return message.channel.send(`Please provide a player name.`);
+        function checkName(player) {
+            return fetch(`https://playerdb.co/api/player/minecraft/${plr}`)
+            .then(data => data.json())
+            .then(player => player.success);
+        }
+          const id = await checkName(plr)
+          if(id == false) return message.reply(`\`${plr}\` isn't a valid minecraft username!`)
 
-        let playerObj = await hypixelAPI.getPlayer(player).catch(err => {
-            return message.channel.send(`\`${player}\` is not a valid Minecraft username.`);
-        })
+        let playerObj = await hypixel.getPlayer(plr)
         let stats = playerObj.stats.skywars
         let embed = new MessageEmbed()
             .setTitle(`${playerObj}'s Skywars Stats`)
@@ -28,14 +33,9 @@ module.exports = {
                 { name: "Deaths", value: stats.deaths.toString(), inline: true },
                 { name: "Coins", value: stats.coins.toString(), inline: true },
                 { name: "K/D Ratio", value: stats.KDRatio.toString(), inline: true},
+                { name: "W/L Ratio", value: stats.WLRatio.toString(), inline: true},
             )
             .setFooter({ text: `Galactic Bot Stats ● Requested by ${message.author.tag}`, iconURL: client.user.avatarURL() })
-
-        hypixelAPI.getSkyblockProfiles(player).then(profiles => {
-            console.log(profiles[0].members[0].uuid);
-        }).catch(e => {
-                console.log(e);
-        })
         return message.reply({embeds: [embed]});
     }
 }

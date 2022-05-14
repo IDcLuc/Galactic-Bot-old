@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const HypixelAPI = require('hypixel-api')
-const clent = new HypixelAPI("8477c865-dfca-4354-b32c-3a78e8c24f3e");
+const hypixel = require('../../hypixelapi')
 
 module.exports = {
     name: "skills",
@@ -20,7 +19,7 @@ module.exports = {
                     { name: "Foraging", value: "Level " + skills.skyblock_gatherer, inline: true },
                     { name: "Enchanting", value: "Level " + skills.skyblock_augmentation, inline: true },
                     { name: "Alchemy", value: "Level " + skills.skyblock_concoctor, inline: true },
-                    { name: "Catacombs", value: "Level (This value is likely wrong) " + skills.skyblock_dungeoneer, inline: true },
+                    { name: "Catacombs", value: "Level " + skills.skyblock_dungeoneer, inline: true },
                 )
                 .setFooter({ text: `Galactic Bot Stats ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL()})
 

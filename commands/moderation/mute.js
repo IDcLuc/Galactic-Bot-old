@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.Js')
+const { MessageEmbed } = require('discord.js')
 const { MessageMentions } = require("discord.js")
 const { Permissions } = require("discord.js")
 

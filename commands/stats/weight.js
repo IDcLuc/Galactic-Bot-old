@@ -46,6 +46,9 @@ module.exports = {
                 let farm = Math.pow(farming * 10, 0.5 + 1.217848139 + farming / 100) / 1250;
                 let tame = Math.pow(taming * 10, 0.5 + 1.14744 + taming / 100) / 1250;
 
+                let skillweight = forage + fish + brewing + enchant + fight + mine + farm + tame
+                message.reply(skillweight)
+
             }).catch(e => {
                 console.log(e);
             })

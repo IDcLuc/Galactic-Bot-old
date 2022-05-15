@@ -37,14 +37,14 @@ module.exports = {
                 let farming = skill.farming.level 
                 let taming = skill.taming.level
                 //skills weight
-                let forage = Math.pow(skillname * 10, 0.5 + eponent + skillname / 100) / 1250;
-                let fish = Math.pow(skillname * 10, 0.5 + eponent + skillname / 100) / 1250;
-                let brewing = Math.pow(skillname * 10, 0.5 + eponent + skillname / 100) / 1250;
-                let enchant = Math.pow(skillname * 10, 0.5 + eponent + skillname / 100) / 1250;
-                let fight = Math.pow(skillname * 10, 0.5 + eponent + skillname / 100) / 1250;
-                let mine = Math.pow(mining * 10, 0.5 + eponent + mining / 100) / 1250;
-                let farm = Math.pow(skillname * 10, 0.5 + exponent + skillname / 100) / 1250;
-                let tame = Math.pow(skillname * 10, 0.5 + exponent + skillname / 100) / 1250;
+                let forage = Math.pow(foraging * 10, 0.5 + 1.232826 + foraging / 100) / 1250;
+                let fish = Math.pow(fishing * 10, 0.5 + 1.406418 + fishing / 100) / 1250;
+                let brewing = Math.pow(alchemy * 10, 0.5 + 1.0 + alchemy / 100) / 1250;
+                let enchant = Math.pow(enchanting * 10, 0.5 + 0.96976583 + enchanting / 100) / 1250;
+                let fight = Math.pow(combat * 10, 0.5 + 1.15797687265 + combat / 100) / 1250;
+                let mine = Math.pow(mining * 10, 0.5 + 1.18207448 + mining / 100) / 1250;
+                let farm = Math.pow(farming * 10, 0.5 + 1.217848139 + farming / 100) / 1250;
+                let tame = Math.pow(taming * 10, 0.5 + 1.14744 + taming / 100) / 1250;
 
             }).catch(e => {
                 console.log(e);

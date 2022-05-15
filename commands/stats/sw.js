@@ -10,8 +10,7 @@ module.exports = {
     run: async ({client, message, args}) => {
         let plr = args[0];
 
-        if (!plr)
-            return message.channel.send(`Please provide a player name.`);
+        if (!plr) return message.channel.send(`Please provide a player name.`);
         function checkName(player) {
             return fetch(`https://playerdb.co/api/player/minecraft/${plr}`)
             .then(data => data.json())

@@ -22,7 +22,7 @@ module.exports = {
         let playerObj = await hypixel.getPlayer(plr)
         let bedWarsStats = playerObj.stats.bedwars 
         
-        let embed = new MessageEmbed()
+        let embed = new MessageEmbed() 
             .setTitle("Bedwars Stats")
             .setThumbnail(`https://crafatar.com/renders/body/${playerObj.uuid}?overlay&size=128`)
             .addFields(

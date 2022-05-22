@@ -23,7 +23,7 @@ module.exports = {
 
         let playerObj = await hypixel.getPlayer(plr)
         let stats = playerObj.stats.skywars
-        let embed = new MessageEmbed()
+        let embed = new MessageEmbed()  
             .setTitle(`${playerObj}'s Skywars Stats`)
             .setThumbnail(`https://crafatar.com/renders/body/${playerObj.uuid}?overlay&size=128`)
             .addFields(

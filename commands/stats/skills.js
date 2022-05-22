@@ -44,7 +44,7 @@ module.exports = {
                         { name: "Catacombs " + member.get(lastprofile).dungeons.types.level, value: "Level ", inline: true },
                     )
                     .setFooter({ text: `Galactic Bot Stats ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL()})
-                message.reply({ embeds: [embed] })
+                message.reply({ embeds: [embed] }) 
             }).catch(e => {
                 console.log(e);
             })

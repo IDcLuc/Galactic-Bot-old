@@ -4,6 +4,7 @@ const fetch = require('node-fetch')
 
 module.exports = {
     name: "sw",
+    aliases: ["skywars"],
     category: "stats",
     permissions: [],
     devOnly: false,
@@ -11,6 +12,7 @@ module.exports = {
         let plr = args[0];
 
         if (!plr) return message.channel.send(`Please provide a player name.`);
+        
         function checkName(player) {
             return fetch(`https://playerdb.co/api/player/minecraft/${plr}`)
             .then(data => data.json())

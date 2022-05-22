@@ -20,8 +20,8 @@ module.exports = {
                     { name: "Search", value: "namemc, skycrypt"},
                     { name: "Stats", value: "bw, sw, skills, weight"}
                 )
-                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
- 
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
+                
             let kickembed = new MessageEmbed()
             kickembed 
                 .setTitle("Kick")
@@ -31,7 +31,7 @@ module.exports = {
                     { name: "Usage", value: "g!kick [member] [reason]"},
                     { name: "Example", value: "g!kick <@453943223229087748> Bullying"}
                 )
-                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
 
             let banembed = new MessageEmbed()
             banembed
@@ -42,7 +42,7 @@ module.exports = {
                     { name: "Usage", value: "g!ban [member] [reason]"},
                     { name: "Example", value: "g!ban <@453943223229087748> Raiding"}
                 )
-                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
             
             let muteembed = new MessageEmbed()
             muteembed
@@ -53,7 +53,7 @@ module.exports = {
                     { name: "Usage", value: "g!mute [member] [reason]"},
                     { name: "Example", value: "g!mute <@453943223229087748> Excessive usage of bad words"}
                 )
-                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
             
             let pingembed = new MessageEmbed()
             pingembed
@@ -64,7 +64,7 @@ module.exports = {
                     { name: "Usage", value: "g!ping"},
                     { name: "Alias", value: "g!pong"}
                 )
-                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
 
             let prefixembed = new MessageEmbed()
                 .setTitle("ping")
@@ -74,7 +74,7 @@ module.exports = {
                     { name: "Usage", value: "g!prefix"},
                     { name: "Alias", value: "g!pref"}
                 )
-                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
 
             let nmcembed = new MessageEmbed()
             nmcembed
@@ -87,7 +87,7 @@ module.exports = {
                     { name: "Alias", value: "g!nmc"},
                     { name: "Example", value: "g!namemc MajorX500 \n g!nmc IDcLuc"}
                 )
-                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
                 
             let statsembed = new MessageEmbed()
             statsembed
@@ -100,7 +100,7 @@ module.exports = {
                     { name: "Alias", value: "g!sb \n g!stats"},
                     { name: "Example", value: "g!skycrypt MajorX500 \n g!sb IDcLuc \n g!stats Observin"}
                 )
-                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})    
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})    
             
             let baldembed = new MessageEmbed()
             baldembed
@@ -111,8 +111,20 @@ module.exports = {
                     { name: "Alias", value: "g!bald \n g!confirmbald"},
                     { name: "usage", value: "g!baldconfirm Major \n g!bald Majorx500 \n g!confirmbald <@794258833924292608>"}
                 )
-                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
+
+            let bw = new MessageEmbed()
+            bw
+                .setTitle("B")
+                .setDescription("Confirms someone's baldness.")
+                .addFields(
+                    { name: "Usage", value: "g!baldconfirm [name]"},
+                    { name: "Alias", value: "g!bald \n g!confirmbald"},
+                    { name: "usage", value: "g!baldconfirm Major \n g!bald Majorx500 \n g!confirmbald <@794258833924292608>"}
+                )
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
         
+
         switch(cmdname){
         case ("kick"):
             message.reply({ embeds: [kickembed] })
@@ -129,19 +141,13 @@ module.exports = {
         case ("prefix"):
             message.reply({ embeds: [prefixembed] })
         break;
-        case ('pref'):
-            message.reply({ embeds: [prefixembed] })
-        break;
-        case ("pong"):
-            message.reply({ embeds: [pingembed] })
-        break;
-        case ("namemc" && "nmc"):
+        case ("namemc"):
             message.reply({ embeds: [nmcembed]})
         break;
-        case ("skycrypt" && "sb" && "stats"):
+        case ("skycrypt"):
             message.reply({ embeds: [statsembed] })
         break;
-        case ("bald" && "baldconfirm" && "confirmbald"):
+        case ("bald"):
             message.reply({ embeds: [baldembed]} )
         break;
         default:

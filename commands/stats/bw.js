@@ -3,6 +3,7 @@ const hypixel = require('../../hypixelapi');
 const fetch = require('node-fetch')
 module.exports = {
     name: "bw",
+    aliases: ["bedwars"],
     category: "stats",
     permissions: [],
     devOnly: false,
@@ -20,7 +21,7 @@ module.exports = {
   
         let playerObj = await hypixel.getPlayer(plr)
         let bedWarsStats = playerObj.stats.bedwars 
-
+        
         let embed = new MessageEmbed()
             .setTitle("Bedwars Stats")
             .setThumbnail(`https://crafatar.com/renders/body/${playerObj.uuid}?overlay&size=128`)
@@ -35,9 +36,9 @@ module.exports = {
                 { name: "FK/D Ratio", value: bedWarsStats.finalKDRatio.toString(), inline: true},
                 { name: "W/L Ratio", value: bedWarsStats.WLRatio.toString(), inline: true},
             )
-            .setFooter({ text: `Galactic Bot Stats ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+            .setFooter({ text: `Galactic Bot Stats ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL() })
 
 
-        return message.reply({embeds: [embed]});
+        message.reply({embeds: [embed]});
     }
 }

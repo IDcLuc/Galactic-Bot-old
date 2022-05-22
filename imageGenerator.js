@@ -52,7 +52,7 @@ const WelcomeImg = async (member) => {
         const avImg = await Canvas.loadImage(member.user.displayAvatarURL({ format: "png" }))
     
         ctx.drawImage(avImg, avatar.x, avatar.y, avatar.w, avatar.h)
-    }    
+    }      
     await drawUserAvatar(ctx, member, { w: av.size, h: av.size, x: av.x, y: av.y })
     ctx.restore()
     //draw text

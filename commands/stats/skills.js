@@ -9,7 +9,7 @@ module.exports = {
     devOnly: false,
     run: async ({client, message, args}) => {   
         let plr = args[0]
-        if (!plr) return message.reply("Please provide a player")
+        if (!plr) return message.reply("Please provide a player name.")
         function checkname(player) {
             return fetch(`https://playerdb.co/api/player/minecraft/${player}`)
             .then(data => data.json())

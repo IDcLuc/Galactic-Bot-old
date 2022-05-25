@@ -17,6 +17,13 @@ module.exports = {
         }
         const success = await checkname(plr)
         if(success == false) return message.reply(`\`${plr}\` isn't a valid minecraft username!`)
+        
+        function playedSkyblock(playerUUID) {
+            return fetch(`https://api.hypixel.net/skyblock/profiles?uuid=${playerUUID}&key=${process.env.apikey}`)
+            .then(data => data.json())
+            .then(player => player.profiles)
+        }; const played = await playedSkyblock(playerID)
+        if(played == null) return message.reply("This player doesn't have a skyblock profile!")
 
         hypixel.getSkyblockProfiles(plr).then((profiles) => {
             profiles.sort((a, b) => b.me.lastSaveTimestamp - a.me.lastSaveTimestamp)[0];

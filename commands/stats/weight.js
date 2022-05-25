@@ -39,8 +39,7 @@ module.exports = {
                 function calcSkillWeight(skillname, numidk) {
                     const percentage = skillname.xpCurrent/skillname.xpForNext * 100
                     const lev = skillname.level + percentage / 100
-                    const ToRound = Math.pow(lev * 10, 0.5 + numidk + lev / 100) / 1250
-                    return ToRound
+                    return Math.pow(lev * 10, 0.5 + numidk + lev / 100) / 1250
                 }
                 const forage = calcSkillWeight(sbstat.skills.foraging, exponents.foraging)
                 const fish = calcSkillWeight(sbstat.skills.fishing, exponents.fishing)
@@ -61,8 +60,7 @@ module.exports = {
                 function calcDungeonWeight(type, divider) {
                     const percentage = type.xpCurrent/type.xpForNext * 100
                     const lev = type.level + percentage / 100
-                    const toRound = Math.pow(lev, 4.5) * divider
-                    return toRound
+                    return Math.pow(type.level + percentage, 4.5) * divider
                 }
                 const catacombs = calcDungeonWeight(sbstat.dungeons.types.catacombs, 0.0002149604615)
                 const healer = calcDungeonWeight(sbstat.dungeons.classes.healer, 0.0000045254834)
@@ -85,7 +83,7 @@ module.exports = {
                 const tara = calcSlayerWeight(sbstat.slayer.spider, 2118)
                 const wolf = calcSlayerWeight(sbstat.slayer.wolf, 1962)
 
-                const slw = Math.round(rev + tara + wolf * 10) / 10
+                const slw = Math.round((rev + tara + wolf) * 10) / 10
                 const slayerweight = slw.toString()
                 console.log(slayerweight)
                 message.reply(slayerweight)

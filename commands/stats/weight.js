@@ -1,5 +1,8 @@
 const hypixel = require('../../hypixelapi');
 const fetch = require("node-fetch")
+const { MessageEmbed } = require('discord.js');
+const bignumber = require('bignumber.js')
+
 module.exports = {
     name: "weight",
     category: "stats",
@@ -14,17 +17,37 @@ module.exports = {
             return fetch(`https://playerdb.co/api/player/minecraft/${player}`)
             .then(data => data.json())
             .then(player => player.success)
-        }
-
-        const valid = checkName(plr)
+        }; const valid = await checkName(plr)
         if(valid == false) return message.reply(`\`${plr}\` isn't a valid minecraft username!`)
 
+        function getUUID(player) {
+            return fetch(`https://playerdb.co/api/player/minecraft/${player}`)
+            .then(data => data.json())
+            .then(player => player.data.player.raw_id)
+        }; const playerID = await getUUID(plr)
+
+        function usercaps(player) {
+            return fetch(`https://api.mojang.com/users/profiles/minecraft/${player}`)
+            .then(data => data.json())
+            .then(player => player.name)
+        }; const userwithcaps = await usercaps(plr)
+
+        function playedSkyblock(playerUUID) {
+            return fetch(`https://api.hypixel.net/skyblock/profiles?uuid=${playerUUID}&key=${process.env.apikey}`)
+            .then(data => data.json())
+            .then(player => player.profiles)
+        }; const played = await playedSkyblock(playerID)
+        if(played == null) return message.reply("This player doesn't have a skyblock profile!")
+
+        
         hypixel.getSkyblockProfiles(args[0]).then((profiles) => {
             profiles.sort((a, b) => b.me.lastSaveTimestamp - a.me.lastSaveTimestamp)[0];
             let lastprofile = profiles[0].profileName
 /////////////////////////////////////////////////////////////////////////////////////
             hypixel.getSkyblockMember(plr).then(member => {
                 const sbstat = member.get(lastprofile)
+
+                // skills weight
                 const exponents = {
                     mining: 1.18207448,
                     foraging: 1.232826,
@@ -35,7 +58,6 @@ module.exports = {
                     alchemy: 1.0,
                     taming: 1.14744,
                 }
-                // skills weight
                 function calcSkillWeight(skillname, numidk) {
                     const percentage = skillname.xpCurrent/skillname.xpForNext * 100
                     const lev = skillname.level + percentage / 100
@@ -51,16 +73,12 @@ module.exports = {
                 const tame = calcSkillWeight(sbstat.skills.taming, exponents.taming)
 
                 const skillWeightt = Math.round((forage + fish + brewing + enchant + fight + mine + farm + tame) * 10) / 10
-                const skillWeight = skillWeightt.toString()
-
-                console.log(skillWeight)
-                message.reply(skillWeight)
 
                 // dungeons weight
                 function calcDungeonWeight(type, divider) {
                     const percentage = type.xpCurrent/type.xpForNext * 100
                     const lev = type.level + percentage / 100
-                    return Math.pow(type.level + percentage, 4.5) * divider
+                    return Math.pow(lev, 4.5) * divider
                 }
                 const catacombs = calcDungeonWeight(sbstat.dungeons.types.catacombs, 0.0002149604615)
                 const healer = calcDungeonWeight(sbstat.dungeons.classes.healer, 0.0000045254834)
@@ -70,10 +88,6 @@ module.exports = {
                 const tank = calcDungeonWeight(sbstat.dungeons.classes.tank, 0.0000045254834)
                 
                 const dw = Math.round((catacombs + healer + berserk + archer + mage + tank) * 10) / 10
-                const dungeonweight = dw.toString()
-
-                console.log(dungeonweight)
-                message.reply(dungeonweight)
 
                 // slayer weight
                 function calcSlayerWeight(type, divider) {
@@ -82,11 +96,15 @@ module.exports = {
                 const rev = calcSlayerWeight(sbstat.slayer.zombie, 2208)
                 const tara = calcSlayerWeight(sbstat.slayer.spider, 2118)
                 const wolf = calcSlayerWeight(sbstat.slayer.wolf, 1962)
+                const enderman = calcSlayerWeight(sbstat.slayer.enderman, 1430)
 
-                const slw = Math.round((rev + tara + wolf) * 10) / 10
-                const slayerweight = slw.toString()
-                console.log(slayerweight)
-                message.reply(slayerweight)
+                const slw = Math.round((rev + tara + wolf + enderman) * 10) / 10
+
+                let theEmbed = new MessageEmbed()
+                    .setTitle(`${userwithcaps}'s Senither Weight on ${lastprofile}`)
+                    .setDescription(`Total: **${Math.round((dw + slw + skillWeightt) * 10) / 10}** without Overflow`)
+
+                message.reply({ embeds: [theEmbed]} )
             }).catch(e => {
                 console.log(e)
                 message.reply('An error occured while performing this action.')

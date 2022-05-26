@@ -24,6 +24,11 @@ module.exports = {
             .then(player => player.profiles)
         }; const played = await playedSkyblock(playerID)
         if(played == null) return message.reply("This player doesn't have a skyblock profile!")
+        function getUUID(player) {
+            return fetch(`https://playerdb.co/api/player/minecraft/${player}`)
+            .then(data => data.json())
+            .then(player => player.data.player.raw_id)
+        }; const playerID = await getUUID(plr)
 
         hypixel.getSkyblockProfiles(plr).then((profiles) => {
             profiles.sort((a, b) => b.me.lastSaveTimestamp - a.me.lastSaveTimestamp)[0];
@@ -34,10 +39,12 @@ module.exports = {
                     return fetch(`https://api.mojang.com/users/profiles/minecraft/${player}`)
                     .then(data => data.json())
                     .then(player => player.name);
-                }
+                }        
+        
                 const skill = member.get(lastprofile).skills
                 let embed = new MessageEmbed()
                     .setTitle(`${getname(args[0])}'s Skills`)
+                    .setThumbnail(`https://crafatar.com/renders/body/${playerObj.uuid}?overlay&size=128`)
                     .addFields(
                         { name: "Combat " + skill.combat.level, value: "Level", inline: true },
                         { name: "Farming " + skill.farming.level, value: "Level", inline: true },

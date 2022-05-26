@@ -44,7 +44,7 @@ module.exports = {
                 const skill = member.get(lastprofile).skills
                 let embed = new MessageEmbed()
                     .setTitle(`${getname(args[0])}'s Skills`)
-                    .setThumbnail(`https://crafatar.com/renders/body/${playerObj.uuid}?overlay&size=128`)
+                    .setThumbnail(`https://crafatar.com/renders/body/${playerID}?overlay&size=128`)
                     .addFields(
                         { name: "Combat " + skill.combat.level, value: "Level", inline: true },
                         { name: "Farming " + skill.farming.level, value: "Level", inline: true },

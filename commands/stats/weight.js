@@ -1,7 +1,6 @@
 const hypixel = require('../../hypixelapi');
 const fetch = require("node-fetch")
 const { MessageEmbed } = require('discord.js');
-const bignumber = require('bignumber.js')
 
 module.exports = {
     name: "weight",
@@ -99,10 +98,27 @@ module.exports = {
                 const enderman = calcSlayerWeight(sbstat.slayer.enderman, 1430)
 
                 const slw = Math.round((rev + tara + wolf + enderman) * 10) / 10
+                const senWeight = slw + skillWeightt + dw
+
+                let stage = "Early Game"
+                if(senWeight >= 2000 && senWeight <= 7000) stage = "Mid Game"
+                else if(senWeight >= 7000 && senWeight <= 10000) stage = "Late Game"
+                else if(senWeight >= 10000 && senWeight <= 15000) stage = "Early End Game"
+                else if(senWeight >= 15000 && senWeight <= 30000) stage = "End Game"
+                else if(senWeight >= 30000) stage = "Just.. I don't even know, a no-lifer?"
 
                 let theEmbed = new MessageEmbed()
                     .setTitle(`${userwithcaps}'s Senither Weight on ${lastprofile}`)
-                    .setDescription(`Total: **${Math.round((dw + slw + skillWeightt) * 10) / 10}** without Overflow`)
+                    .setURL(`https://sky.shiiyu.moe/${plr}`)
+                    .setDescription(`Total: **${Math.round((senWeight) * 10) / 10}**\n Stage: **${stage}**\nThere might be issues if this person have any Overflow weight... And I'm too lazy to try and fix it.`)
+                    .setThumbnail(`https://crafatar.com/renders/body/${playerID}?overlay&size=128`)
+                    .addFields(
+                        { name: `<:diamond_sword:979322481678639124> Skills: ${skillWeightt}`, value:`➜ Farming: **${Math.round(farm * 10) / 10}**\n➜ Mining: **${Math.round(mine * 10) / 10}**\n➜ Foraging: **${Math.round(forage * 10) / 10}**\n➜ Combat: **${Math.round(fight * 10) / 10}**\n➜ Taming: **${Math.round(tame * 10) / 10}**\n➜ Fishing: **${Math.round(fish * 10) / 10}**\n➜ Alchemy: **${Math.round(brewing * 10) / 10}**\n➜ Enchanting: **${Math.round(enchant * 10) / 10}**`},
+                        { name: `<:maddox:979377063842676786> Slayers: ${slw}`, value: `➜ Revenant Horror: **${Math.round(rev * 10) / 10 }**\n➜ Tarantula Broodfather: **${Math.round(tara * 10) / 10}**\n➜ Sven Packmaster: **${Math.round(wolf * 10) / 10}**\n➜ Voidgloom Seraph: **${Math.round(enderman * 10) / 10}**`},
+                        { name: `<:catacombs:979377305073877072> Dungeons: ${dw}`, value: `➜ Catacombs: **${Math.round(catacombs * 10) / 10}**\n➜ Healer: **${Math.round(healer * 10) / 10}**\n➜ Berserker: **${Math.round(berserk * 10) / 10}**\n➜ Archer: **${Math.round(archer * 10) / 10}**\n➜ Tank: **${Math.round(tank * 10) / 10}**\n➜ Mage: **${Math.round(mage * 10) / 10}**`}
+                    )
+                    .setFooter({ text: `Galactic Bot Stats ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL()})
+
 
                 message.reply({ embeds: [theEmbed]} )
             }).catch(e => {
@@ -113,4 +129,3 @@ module.exports = {
         })
     }
 }
-

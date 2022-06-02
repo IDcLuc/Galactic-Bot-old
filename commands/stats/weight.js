@@ -18,18 +18,13 @@ module.exports = {
             .then(player => player.success)
         }; const valid = await checkName(plr)
         if(valid == false) return message.reply(`\`${plr}\` isn't a valid minecraft username!`)
+        let playerObj = await hypixel.getPlayer(plr)
 
         function getUUID(player) {
             return fetch(`https://playerdb.co/api/player/minecraft/${player}`)
             .then(data => data.json())
             .then(player => player.data.player.raw_id)
         }; const playerID = await getUUID(plr)
-
-        function usercaps(player) {
-            return fetch(`https://api.mojang.com/users/profiles/minecraft/${player}`)
-            .then(data => data.json())
-            .then(player => player.name)
-        }; const userwithcaps = await usercaps(plr)
 
         function playedSkyblock(playerUUID) {
             return fetch(`https://api.hypixel.net/skyblock/profiles?uuid=${playerUUID}&key=${process.env.apikey}`)
@@ -47,29 +42,41 @@ module.exports = {
                 const sbstat = member.get(lastprofile)
 
                 // skills weight
-                const exponents = {
-                    mining: 1.18207448,
-                    foraging: 1.232826,
-                    enchanting: 0.96976583,
-                    farming: 1.217848139,
-                    combat: 1.15797687265,
-                    fishing: 1.406418,
-                    alchemy: 1.0,
-                    taming: 1.14744,
+                const skillWeig = {
+                    exponents: {
+                        mining: 1.18207448,
+                        foraging: 1.232826,
+                        enchanting: 0.96976583,
+                        farming: 1.217848139,
+                        combat: 1.15797687265,
+                        fishing: 1.406418,
+                        alchemy: 1.0,
+                        taming: 1.14744
+                    },
+                    maxWeight: {
+                        forage: 850,
+                        mine: 1750,
+                        enchant: 450,
+                        farm: 2200,
+                        fight: 1500,
+                        fish: 2500,
+                        brewing: 200,
+                        tame: 500
+                    }
                 }
                 function calcSkillWeight(skillname, numidk) {
                     const percentage = skillname.xpCurrent/skillname.xpForNext * 100
                     const lev = skillname.level + percentage / 100
                     return Math.pow(lev * 10, 0.5 + numidk + lev / 100) / 1250
                 }
-                const forage = calcSkillWeight(sbstat.skills.foraging, exponents.foraging)
-                const fish = calcSkillWeight(sbstat.skills.fishing, exponents.fishing)
-                const brewing = calcSkillWeight(sbstat.skills.alchemy, exponents.alchemy)
-                const enchant = calcSkillWeight(sbstat.skills.enchanting, exponents.enchanting)
-                const fight = calcSkillWeight(sbstat.skills.combat, exponents.combat)
-                const mine = calcSkillWeight(sbstat.skills.mining, exponents.mining)
-                const farm = calcSkillWeight(sbstat.skills.farming, exponents.farming)
-                const tame = calcSkillWeight(sbstat.skills.taming, exponents.taming)
+                let forage = calcSkillWeight(sbstat.skills.foraging, skillWeig.exponents.foraging)
+                let fish = calcSkillWeight(sbstat.skills.fishing, skillWeig.exponents.fishing)
+                let brewing = calcSkillWeight(sbstat.skills.alchemy, skillWeig.exponents.alchemy)
+                let enchant = calcSkillWeight(sbstat.skills.enchanting, skillWeig.exponents.enchanting)
+                let fight = calcSkillWeight(sbstat.skills.combat, skillWeig.exponents.combat)
+                let mine = calcSkillWeight(sbstat.skills.mining, skillWeig.exponents.mining)
+                let farm = calcSkillWeight(sbstat.skills.farming, skillWeig.exponents.farming)
+                let tame = calcSkillWeight(sbstat.skills.taming, skillWeig.exponents.taming)
 
                 const skillWeightt = Math.round((forage + fish + brewing + enchant + fight + mine + farm + tame) * 10) / 10
 
@@ -99,18 +106,27 @@ module.exports = {
 
                 const slw = Math.round((rev + tara + wolf + enderman) * 10) / 10
                 const senWeight = slw + skillWeightt + dw
+                if(forage >= skillWeig.maxWeight.forage) forage = skillWeig.maxWeight.forage
+                if(fish >= skillWeig.maxWeight.fish) fish = skillWeig.maxWeight.fish
+                if(brewing >= skillWeig.maxWeight.brewing) brewing = skillWeig.maxWeight.brewing
+                if(enchant >= skillWeig.maxWeight.enchant) enchant = skillWeig.maxWeight.enchant
+                if(fight >= skillWeig.maxWeight.fight) fight = skillWeig.maxWeight.fight
+                if(mine >= skillWeig.maxWeight.mine) mine = skillWeig.maxWeight.mine
+                if(farm >= skillWeig.maxWeight.farm) farm = skillWeig.maxWeight.farm
+                if(tame >= skillWeig.maxWeight.tame) tame = skillWeig.maxWeight.tame
+
 
                 let stage = "Early Game"
                 if(senWeight >= 2000 && senWeight <= 7000) stage = "Mid Game"
                 else if(senWeight >= 7000 && senWeight <= 10000) stage = "Late Game"
                 else if(senWeight >= 10000 && senWeight <= 15000) stage = "Early End Game"
                 else if(senWeight >= 15000 && senWeight <= 30000) stage = "End Game"
-                else if(senWeight >= 30000) stage = "Just.. I don't even know, a no-lifer?"
+                else if(senWeight >= 30000) stage = "Idk, like wtf?"
 
                 let theEmbed = new MessageEmbed()
-                    .setTitle(`${userwithcaps}'s Senither Weight on ${lastprofile}`)
+                    .setTitle(`${playerObj}'s Senither Weight on ${lastprofile} without Overflow`)
                     .setURL(`https://sky.shiiyu.moe/${plr}`)
-                    .setDescription(`Total: **${Math.round((senWeight) * 10) / 10}**\n Stage: **${stage}**\nThere might be issues if this person have any Overflow weight... And I'm too lazy to try and fix it.`)
+                    .setDescription(`Total: **${Math.round((senWeight) * 10) / 10}**\n Stage: **${stage}**`)
                     .setThumbnail(`https://crafatar.com/renders/body/${playerID}?overlay&size=128`)
                     .addFields(
                         { name: `<:diamond_sword:979322481678639124> Skills: ${skillWeightt}`, value:`➜ Farming: **${Math.round(farm * 10) / 10}**\n➜ Mining: **${Math.round(mine * 10) / 10}**\n➜ Foraging: **${Math.round(forage * 10) / 10}**\n➜ Combat: **${Math.round(fight * 10) / 10}**\n➜ Taming: **${Math.round(tame * 10) / 10}**\n➜ Fishing: **${Math.round(fish * 10) / 10}**\n➜ Alchemy: **${Math.round(brewing * 10) / 10}**\n➜ Enchanting: **${Math.round(enchant * 10) / 10}**`},

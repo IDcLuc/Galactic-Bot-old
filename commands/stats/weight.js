@@ -17,7 +17,7 @@ module.exports = {
             .then(data => data.json())
             .then(player => player.success)
         }; const valid = await checkName(plr)
-        if(valid == false) return message.reply(`\`${plr}\` isn't a valid minecraft username!`)
+        if(!valid) return message.reply(`\`${plr}\` isn't a valid minecraft username!`)
         let playerObj = await hypixel.getPlayer(plr)
 
         function getUUID(player) {
@@ -37,7 +37,6 @@ module.exports = {
         hypixel.getSkyblockProfiles(args[0]).then((profiles) => {
             profiles.sort((a, b) => b.me.lastSaveTimestamp - a.me.lastSaveTimestamp)[0];
             let lastprofile = profiles[0].profileName
-/////////////////////////////////////////////////////////////////////////////////////
             hypixel.getSkyblockMember(plr).then(member => {
                 const sbstat = member.get(lastprofile)
 
@@ -78,6 +77,16 @@ module.exports = {
                 let farm = calcSkillWeight(sbstat.skills.farming, skillWeig.exponents.farming)
                 let tame = calcSkillWeight(sbstat.skills.taming, skillWeig.exponents.taming)
 
+                if(forage >= skillWeig.maxWeight.forage) forage = skillWeig.maxWeight.forage
+                if(fish >= skillWeig.maxWeight.fish) fish = skillWeig.maxWeight.fish
+                if(brewing >= skillWeig.maxWeight.brewing) brewing = skillWeig.maxWeight.brewing
+                if(enchant >= skillWeig.maxWeight.enchant) enchant = skillWeig.maxWeight.enchant
+                if(fight >= skillWeig.maxWeight.fight) fight = skillWeig.maxWeight.fight
+                if(mine >= skillWeig.maxWeight.mine) mine = skillWeig.maxWeight.mine
+                if(farm >= skillWeig.maxWeight.farm) farm = skillWeig.maxWeight.farm
+                if(tame >= skillWeig.maxWeight.tame) tame = skillWeig.maxWeight.tame
+
+
                 const skillWeightt = Math.round((forage + fish + brewing + enchant + fight + mine + farm + tame) * 10) / 10
 
                 // dungeons weight
@@ -106,22 +115,28 @@ module.exports = {
 
                 const slw = Math.round((rev + tara + wolf + enderman) * 10) / 10
                 const senWeight = slw + skillWeightt + dw
-                if(forage >= skillWeig.maxWeight.forage) forage = skillWeig.maxWeight.forage
-                if(fish >= skillWeig.maxWeight.fish) fish = skillWeig.maxWeight.fish
-                if(brewing >= skillWeig.maxWeight.brewing) brewing = skillWeig.maxWeight.brewing
-                if(enchant >= skillWeig.maxWeight.enchant) enchant = skillWeig.maxWeight.enchant
-                if(fight >= skillWeig.maxWeight.fight) fight = skillWeig.maxWeight.fight
-                if(mine >= skillWeig.maxWeight.mine) mine = skillWeig.maxWeight.mine
-                if(farm >= skillWeig.maxWeight.farm) farm = skillWeig.maxWeight.farm
-                if(tame >= skillWeig.maxWeight.tame) tame = skillWeig.maxWeight.tame
 
-
-                let stage = "Early Game"
-                if(senWeight >= 2000 && senWeight <= 7000) stage = "Mid Game"
-                else if(senWeight >= 7000 && senWeight <= 10000) stage = "Late Game"
-                else if(senWeight >= 10000 && senWeight <= 15000) stage = "Early End Game"
-                else if(senWeight >= 15000 && senWeight <= 30000) stage = "End Game"
-                else if(senWeight >= 30000) stage = "Idk, like wtf?"
+                function between(min, max, num) {
+                    return num >= min && num < max
+                }
+                let stage = "Early Game";
+                switch (true) {  //get stage
+                    case between(2000, 7000, senWeight): 
+                        stage = "Mid Game"
+                    break;
+                    case between(7000, 10000, senWeight): 
+                        stage = "Late Game";
+                    break;
+                    case between(10000, 15000, senWeight): 
+                        stage = "Early End";
+                    break;
+                    case between(15000, 30000, senWeight): 
+                        stage = "End Game"; 
+                    break;
+                    case senWeight >= 30000:
+                        stage = "What the fuck.";
+                    break;
+                }
 
                 let theEmbed = new MessageEmbed()
                     .setTitle(`${playerObj}'s Senither Weight on ${lastprofile} without Overflow`)
@@ -141,7 +156,6 @@ module.exports = {
                 console.log(e)
                 message.reply('An error occured while performing this action.')
             })  
-/////////////////////////////////////////////////////////////////////////////////////
         })
     }
 }

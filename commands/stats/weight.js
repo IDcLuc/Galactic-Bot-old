@@ -68,6 +68,7 @@ module.exports = {
                     const lev = skillname.level + percentage / 100
                     return Math.pow(lev * 10, 0.5 + numidk + lev / 100) / 1250
                 }
+                if (!sbstat.skills) return message.reply(`This player doesn't have skills API on!`)
                 let forage = calcSkillWeight(sbstat.skills.foraging, skillWeig.exponents.foraging)
                 let fish = calcSkillWeight(sbstat.skills.fishing, skillWeig.exponents.fishing)
                 let brewing = calcSkillWeight(sbstat.skills.alchemy, skillWeig.exponents.alchemy)
@@ -77,14 +78,26 @@ module.exports = {
                 let farm = calcSkillWeight(sbstat.skills.farming, skillWeig.exponents.farming)
                 let tame = calcSkillWeight(sbstat.skills.taming, skillWeig.exponents.taming)
 
-                if(forage >= skillWeig.maxWeight.forage) forage = skillWeig.maxWeight.forage
-                if(fish >= skillWeig.maxWeight.fish) fish = skillWeig.maxWeight.fish
-                if(brewing >= skillWeig.maxWeight.brewing) brewing = skillWeig.maxWeight.brewing
-                if(enchant >= skillWeig.maxWeight.enchant) enchant = skillWeig.maxWeight.enchant
-                if(fight >= skillWeig.maxWeight.fight) fight = skillWeig.maxWeight.fight
-                if(mine >= skillWeig.maxWeight.mine) mine = skillWeig.maxWeight.mine
-                if(farm >= skillWeig.maxWeight.farm) farm = skillWeig.maxWeight.farm
-                if(tame >= skillWeig.maxWeight.tame) tame = skillWeig.maxWeight.tame
+                function max_weight(skill, weight) {
+                    return skill > weight ? weight : skill
+                }
+
+                forage = max_weight(forage, skillWeig.maxWeight.forage)
+                fish = max_weight(fish, skillWeig.maxWeight.fish)
+                brewing = max_weight(brewing, skillWeig.maxWeight.brewing)
+                enchant = max_weight(enchant, skillWeig.maxWeight.enchant)
+                fight = max_weight(fight, skillWeig.maxWeight.fight)
+                mine = max_weight(mine, skillWeig.maxWeight.mine)
+                farm = max_weight(farm, skillWeig.maxWeight.farm)
+                tame = max_weight(tame, skillWeig.maxWeight.tame)
+                // if(forage >= skillWeig.maxWeight.forage) forage = skillWeig.maxWeight.forage
+                // if(fish >= skillWeig.maxWeight.fish) fish = skillWeig.maxWeight.fish
+                // if(brewing >= skillWeig.maxWeight.brewing) brewing = skillWeig.maxWeight.brewing
+                // if(enchant >= skillWeig.maxWeight.enchant) enchant = skillWeig.maxWeight.enchant
+                // if(fight >= skillWeig.maxWeight.fight) fight = skillWeig.maxWeight.fight
+                // if(mine >= skillWeig.maxWeight.mine) mine = skillWeig.maxWeight.mine
+                // if(farm >= skillWeig.maxWeight.farm) farm = skillWeig.maxWeight.farm
+                // if(tame >= skillWeig.maxWeight.tame) tame = skillWeig.maxWeight.tame
 
 
                 const skillWeightt = Math.round((forage + fish + brewing + enchant + fight + mine + farm + tame) * 10) / 10

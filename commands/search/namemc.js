@@ -4,6 +4,7 @@ const { MessageEmbed } = require("discord.js")
 module.exports = {
     name: "namemc",
     category: "search",
+    aliases: ["nmc"],
     permissions: [],
     devOnly: false,
     run: async ({client, message, args}) => {

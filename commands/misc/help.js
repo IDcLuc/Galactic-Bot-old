@@ -22,7 +22,7 @@ module.exports = {
                 )
                 .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
                 
-            let kickembed = new MessageEmbed()
+            let kickembed = new MessageEmbed() 
             kickembed 
                 .setTitle("Kick")
                 .setDescription("Kick a member from the discord server.")

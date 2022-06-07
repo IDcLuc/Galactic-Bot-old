@@ -17,7 +17,7 @@ module.exports = {
                 .addFields(
                     { name: "Usage", value: "g!skycrypt [username]"},
                     { name: "Aliases", value: "g!sb, g!stats"},
-                    { name: "Example", value: "g!skycrypt MajorX500, g!sb IDcLuc, g!stats"}
+                    { name: "Example", value: "g!skycrypt MajorX500\ng!sb IDcLuc, g!stats"}
                 )
                 .setFooter({ text: `Galactic Bot by IDcLuc ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
             return message.reply({ embeds: [embed] })            

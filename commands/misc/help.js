@@ -14,9 +14,9 @@ module.exports = {
                 .setTitle('Help')
                 .setDescription(`The prefix for **${message.guild.name}** is **"g!"**. Use g!help [command] to get info about a specific command.`)
                 .addFields(
-                    { name: "Misc", value: "help, ping, prefix" },
+                    { name: "Misc", value: "help, ping, prefix, suggest" },
                     { name: "Moderation", value: "kick, ban, mute"},
-                    { name: "Fun", value: "confirmbald, fax, golden"},
+                    { name: "Fun", value: "confirmbald"},
                     { name: "Search", value: "namemc, skycrypt"},
                     { name: "Stats", value: "bw, sw, skills, weight"}
                 )
@@ -54,7 +54,18 @@ module.exports = {
                     { name: "Example", value: "g!mute <@453943223229087748> Excessive usage of bad words"}
                 )
                 .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
-            
+            let suggestembed = new MessageEmbed()
+            suggestembed
+                .setTitle("Suggest")
+                .setDescription("Suggest a feature for the bot.")
+                .setColor("#863b87")
+                .addFields(
+                    { name: "Usage", value: "g!suggest [suggestion]"},
+                    { name: "Alias", value: "g!suggestion"},
+                    { name: "Example", value: "g!suggest Add a networth command kid smh\ng!suggestion Get better response time smh"},
+                )
+                .setFooter({ text: `Galactic Bot by IDcLuc ● Requested by ${message.author.tag}`, iconURL: "https://cdn.discordapp.com/avatars/952178870646366248/387f44e15d6eb3d51d5ebeddf0503937.webp?size=240"})
+
             let pingembed = new MessageEmbed()
             pingembed
                 .setTitle("ping")
@@ -83,7 +94,6 @@ module.exports = {
                 .setColor("#863b87")
                 .addFields(
                     { name: "Usage", value: "g!namemc [username]"},
-                    { name: "Example", value: "g!namemc MajorX500"},
                     { name: "Alias", value: "g!nmc"},
                     { name: "Example", value: "g!namemc MajorX500 \n g!nmc IDcLuc"}
                 )
@@ -96,7 +106,6 @@ module.exports = {
                 .setColor("#863b87")
                 .addFields(
                     { name: "Usage", value: "g!skycrypt [username]"},
-                    { name: "Example", value: "g!skycrypt MajorX500"},
                     { name: "Alias", value: "g!sb \n g!stats"},
                     { name: "Example", value: "g!skycrypt MajorX500 \n g!sb IDcLuc \n g!stats Observin"}
                 )
@@ -109,22 +118,40 @@ module.exports = {
                 .addFields(
                     { name: "Usage", value: "g!baldconfirm [name]"},
                     { name: "Alias", value: "g!bald \n g!confirmbald"},
-                    { name: "usage", value: "g!baldconfirm Major \n g!bald Majorx500 \n g!confirmbald <@794258833924292608>"}
+                    { name: "Example", value: "g!baldconfirm Major \n g!bald Majorx500 \n g!confirmbald <@794258833924292608>"}
                 )
                 .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
 
             let bw = new MessageEmbed()
             bw
-                .setTitle("B")
-                .setDescription("Confirms someone's baldness.")
+                .setTitle("BedWars")
+                .setDescription("Gets someone's BedWars stats.")
                 .addFields(
-                    { name: "Usage", value: "g!baldconfirm [name]"},
-                    { name: "Alias", value: "g!bald \n g!confirmbald"},
-                    { name: "usage", value: "g!baldconfirm Major \n g!bald Majorx500 \n g!confirmbald <@794258833924292608>"}
+                    { name: "Usage", value: "g!bedwars [username]"},
+                    { name: "Alias", value: "g!bw"},
+                    { name: "Example", value: "g!bedwars Majorx500 \n g!bw IDcLuc"}
                 )
                 .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
-        
+            let sw = new messageEmbed()
+            sw
+                .setTitle("SkyWars")
+                .setDescription("Gets someone's SkyWars stats.")
+                .addFields(
+                    { name: "Usage", value: "g!skywars [username]"},
+                    { name: "Alias", value: "g!sw"},
+                    { name: "Example", value: "g!skywars Majorx500 \n g!sw IDcLuc"}
+                )
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
 
+            let weightembed = new MessageEmbed()
+            weightembed
+                .setTitle("Weight")
+                .setDescription("Gets someone's senither weight.")
+                .addFields(
+                    { name: "Usage", value: "g!weight [username]"},
+                    { name: "Example", value: "g!weight IDcLuc"}
+                )
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
         switch(cmdname){
         case ("kick"):
             message.reply({ embeds: [kickembed] })
@@ -135,21 +162,34 @@ module.exports = {
         case ("mute"):
             message.reply({ embeds: [muteembed] })
         break;
-        case ("ping"):
+        case ("ping" || "pong"):
             message.reply({ embeds: [pingembed] })
         break;
-        case ("prefix"):
+        case ("prefix" || "pref"):
             message.reply({ embeds: [prefixembed] })
         break;
-        case ("namemc"):
+        case ("namemc" || "nmc"):
             message.reply({ embeds: [nmcembed]})
         break;
-        case ("skycrypt"):
+        case ("skycrypt" || "sb" || "stats"):
             message.reply({ embeds: [statsembed] })
         break;
-        case ("bald"):
+        case ("bald" || "confirmbald"):
             message.reply({ embeds: [baldembed]} )
         break;
+        case ("suggest" || "suggestion"):
+            message.reply({ embeds: [suggestembed] })
+        break;
+        case ("bw" || "bedwars"): 
+            message.reply({ embeds: [bwembed] })    
+        break;
+        case ("sw" || "skywars"):
+            message.reply({ embeds: [swembed] })
+        break;
+        case ("weight"):
+            message.reply({ embeds: [weightembed] })
+        break;
+
         default:
             message.reply({ embeds: [defaultembed]})
         }

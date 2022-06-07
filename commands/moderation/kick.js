@@ -27,7 +27,6 @@ module.exports = {
             return message.reply(`First argument (_\`${args[0]}\`_) needs to be a member: g!kick @member123`)
 
         let member = message.mentions.members.first()
-        let reasonn = args.slice(1).join(" ")
         
         if(member.permissions.has(Permissions.FLAGS.KICK_MEMBERS) && !member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)){
             return message.reply(`You can't kick \`\`${member.user.username}\`\` as they have kick permissions.`)
@@ -36,11 +35,11 @@ module.exports = {
             let reason = args.slice(1).join(" ")
             let memberr = message.mentions.members.first()
         try {
+            await member.kick({reason: reason})
             if(args[1])
             await memberr.send(`You have been kicked from **${message.guild.name}** for *\`\`${reason}\`\`*!`)
             else if(!args[1])
             await memberr.send(`You have been kicked from **${message.guild.name}**!`)
-            await member.kick(reason)
             if(args[1])
             message.reply("<@" + memberr + "> has been kicked for ``" + reason +"``.")
             if(!args[1])

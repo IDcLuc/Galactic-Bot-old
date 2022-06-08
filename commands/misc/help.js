@@ -199,7 +199,9 @@ module.exports = {
         case ("weight"):
             message.reply({ embeds: [weightembed] })
         break;
-
+        case ("skills" || "skill" || "sa" || "skillavg"):
+            message.reply({ embeds: [skillsembed] })
+        break;
         default:
             message.reply({ embeds: [defaultembed]})
         }

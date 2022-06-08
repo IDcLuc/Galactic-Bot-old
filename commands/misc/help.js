@@ -143,6 +143,16 @@ module.exports = {
                 )
                 .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
 
+            let skillsembed = new MessageEmbed()
+            skillsembed
+                .setTitle("Skills")
+                .setDescription("Gets someone's skills.")
+                .addFields(
+                    { name: "Usage", value: "g!skills [username]"},
+                    { name: "Alias", value: "g!skill\ng!sa\ng!skillavg"},
+                    { name: "Example", value: "g!skills Majorx500 \n g!skill IDcLuc"}
+                )
+                .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL})
             let weightembed = new MessageEmbed()
             weightembed
                 .setTitle("Weight")

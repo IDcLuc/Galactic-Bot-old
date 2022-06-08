@@ -4,6 +4,7 @@ const fetch = require('node-fetch')
 
 module.exports = {
     name: "skills",
+    aliases: ['skill', 'skillavg', 'sa'],
     category: "stats",
     permissions: [],
     devOnly: false,

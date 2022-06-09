@@ -2,24 +2,24 @@ const fetch = require('node-fetch')
 const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-    name: "meme",
+    name: "fox",
     category: "fun",
     cooldown: 5,
     permissions: [],
     devOnly: false,
     run: async ({client, message, args}) => {
         function getMeme() {
-            return fetch(`https://some-random-api.ml/meme`)
+            return fetch(`https://some-random-api.ml/img/pikachu`)
             .then(data => data.json())
-            .then(player => [player.image, player.caption]);
+            .then(object => object.link);
         }
 
-        const [meme, caption] = await getMeme();
+        const pikachu = await getMeme();
 
         const memeembed = new MessageEmbed()
         memeembed
-            .setTitle(`${caption}`)
-            .setImage(`${meme}`)
+            .setTitle(`*Howls*! :fox:`)
+            .setImage(`${pikachu}`)
             .setColor("RANDOM")
             .setFooter({ text: `Galactic Bot by IDcLuc ● Powered by some-random-api.ml ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL()})
         message.reply({ embeds: [memeembed] })

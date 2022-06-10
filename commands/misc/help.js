@@ -132,7 +132,7 @@ module.exports = {
                     { name: "Example", value: "g!bedwars Majorx500 \n g!bw IDcLuc"}
                 )
                 .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL()})
-            let sw = new messageEmbed()
+            let sw = new MessageEmbed()
             sw
                 .setTitle("SkyWars")
                 .setDescription("Gets someone's SkyWars stats.")

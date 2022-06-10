@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-    name: "fox",
+    name: "pikachu",
     category: "fun",
     cooldown: 5,
     permissions: [],
@@ -18,7 +18,7 @@ module.exports = {
 
         const memeembed = new MessageEmbed()
         memeembed
-            .setTitle(`*Howls*! :fox:`)
+            .setTitle(`Pika! <a:PixelPikachu:984540555650408558>`)
             .setImage(`${pikachu}`)
             .setColor("RANDOM")
             .setFooter({ text: `Galactic Bot by IDcLuc ● Powered by some-random-api.ml ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL()})

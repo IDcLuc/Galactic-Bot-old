@@ -1,6 +1,8 @@
 const Discord = require("discord.js")
 require("dotenv").config()
 const imageGenerator = require('./imageGenerator')
+const mongoose = require("mongoose")
+const messageCount = require("./message-counter.js")
 
 const client = new Discord.Client({
     intents: [
@@ -36,5 +38,16 @@ client.loadEvents(bot, false)
 client.loadCommands(bot, false)
 
 module.exports = bot
+
+client.on("ready", () => {
+    mongoose.connect(
+        process.env.MONGO_URI,
+        {
+            keepAlive: true
+        }
+    )
+        console.log("Connected to mongoDB")
+        messageCount(client)
+})
 
 client.login(process.env.KEY)

@@ -23,7 +23,7 @@ module.exports = {
         let bedWarsStats = playerObj.stats.bedwars 
 
         let embed = new MessageEmbed() 
-            .setTitle("Bedwars Stats")
+            .setTitle(`${playerObj}'s Bedwars Stats`)
             .setThumbnail(`https://crafatar.com/renders/body/${playerObj.uuid}?overlay&size=128`)
             .addFields(
                 { name: "Level", value: bedWarsStats.level.toString(), inline: true },

@@ -1,30 +1,22 @@
 const mongo = require("mongoose")
 const schema = require("./schemas/rank/message-count-schema")
-const messageCountSchema = require("./schemas/rank/message-count-schema")
 
 module.exports = client => {
     
     client.on('messageCreate', async (message) => {    
-        const { author } = message
-        const { id } = author
-        mongo.connect(
-            process.env.MONGO_URI,
-            {
-                keepAlive: true
-            }
-        )
 
-        const dataQuery = await messageCountSchema.findOne({ id })
-        
+        if(message.author.bot) return;
+        if(message.channel.type === 'dm') return;
+
+        let member = message.author.id
+        let dataQuery = await schema.findOne({ userID: member })
+
         if (!dataQuery) {
-            const newSchem = schema(
+            const newSchem = new schema(
                 {
-                    _id: id
-                },
-                {
-                    $inc: {
-                        messageCount: 1
-                    }
+                    _id: mongo.Types.ObjectId(),
+                    userID: member,
+                    messageCount: 1
                 },
                 {
                     upsert: true
@@ -36,14 +28,14 @@ module.exports = client => {
         else {
             dataQuery.updateOne(
                 {
-                    $inc: {
-                        messageCount: 1
-                    }
+
+                    messageCount: dataQuery.messageCount++
                 },
                 {
                     upsert: true
                 }
             )
+            await dataQuery.save()
         }
     })
 }

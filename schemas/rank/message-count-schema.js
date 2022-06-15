@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const messageCountSchema = mongoose.Schema({
+const messageCountSchema = new mongoose.Schema({
     //get ID
-    _id: {
+    userID: {
         type: String,
         required: true
     },
@@ -12,5 +12,5 @@ const messageCountSchema = mongoose.Schema({
         required: true
     }
 })
-
-module.exports = mongoose.model('message-count', messageCountSchema, 'message-count');
+ 
+module.exports = mongoose.model('message-count', messageCountSchema); 

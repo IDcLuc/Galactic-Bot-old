@@ -18,7 +18,7 @@ let bot = {
     owners: ["495514555615543329"]
 }
 
-const welcomeChannelId = "913098493315412028"
+const welcomeChannelId = "913098493315412028" || '986310622876676136'
 
 client.on("guildMemberAdd", async (member) => {               
     const img = await imageGenerator(member)
@@ -39,15 +39,13 @@ client.loadCommands(bot, false)
 
 module.exports = bot
 
-client.on("ready", () => {
-    mongoose.connect(
-        process.env.MONGO_URI,
-        {
-            keepAlive: true
-        }
-    )
-        console.log("Connected to mongoDB")
-        messageCount(client)
-})
+mongoose.connect(
+    process.env.MONGO_URI,
+    { 
+        keepAlive: true
+    }
+)
+console.log("Connected to mongoDB")
+messageCount(client)
 
 client.login(process.env.KEY)

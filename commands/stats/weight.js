@@ -178,7 +178,7 @@ module.exports = {
                 }
 
                 //get stage
-                let stage;
+                let stage = String;
                 switch (true) {
                     case between(2000, 7000, senWeight): 
                         stage = "Mid Game"
@@ -195,36 +195,40 @@ module.exports = {
                     case senWeight >= 30000:
                         stage = "What the fuck.";
                     break;
-                    default: "Early Game";
+                    default: stage = "Early Game";
                 }
 
                 //formating
                 const senWeightFormated = new Intl.NumberFormat('en-US').format(senWeight)
 
-                const farmFormated = new Intl.NumberFormat('en-US').format(Math.round(farm * 10) / 10)
-                const mineFormated = new Intl.NumberFormat('en-US').format(Math.round(mine * 10) / 10)
-                const forageFormated = new Intl.NumberFormat('en-US').format(Math.round(forage * 10) / 10)
-                const fishFormated = new Intl.NumberFormat('en-US').format(Math.round(fish * 10) / 10)
-                const brewingFormated = new Intl.NumberFormat('en-US').format(Math.round(brewing * 10) / 10)
-                const enchantFormated = new Intl.NumberFormat('en-US').format(Math.round(enchant * 10) / 10)
-                const fightFormated = new Intl.NumberFormat('en-US').format(Math.round(fight * 10) / 10)
-                const tameFormated = new Intl.NumberFormat('en-US').format(Math.round(tame * 10) / 10)
+                function formatNum(num) {
+                    return new Intl.NumberFormat('en-US').format(Math.round(num * 10) / 10)
+                }
+
+                const farmFormated = formatNum(farm)
+                const mineFormated = formatNum(mine)
+                const forageFormated = formatNum(forage)
+                const fishFormated = formatNum(fish)
+                const brewingFormated = formatNum(brewing)
+                const enchantFormated = formatNum(enchant)
+                const fightFormated = formatNum(fight)
+                const tameFormated = formatNum(tame)
                 
-                const catacombsFormated = new Intl.NumberFormat('en-US').format(Math.round(catacombs * 10) / 10)
-                const healerFormated = new Intl.NumberFormat('en-US').format(Math.round(healer * 10) / 10)
-                const berserkFormated = new Intl.NumberFormat('en-US').format(Math.round(berserk * 10) / 10)
-                const archerFormated = new Intl.NumberFormat('en-US').format(Math.round(archer * 10) / 10)
-                const mageFormated = new Intl.NumberFormat('en-US').format(Math.round(mage * 10) / 10)
-                const tankFormated = new Intl.NumberFormat('en-US').format(Math.round(tank * 10) / 10)
+                const catacombsFormated = formatNum(catacombs)
+                const healerFormated = formatNum(healer)
+                const berserkFormated = formatNum(berserk)
+                const archerFormated = formatNum(archer)
+                const mageFormated = formatNum(mage)
+                const tankFormated = formatNum(tank)
 
-                const revFormated = new Intl.NumberFormat('en-US').format(Math.round(rev * 10) / 10)
-                const taraFormated = new Intl.NumberFormat('en-US').format(Math.round(tara * 10) / 10)
-                const wolfFormated = new Intl.NumberFormat('en-US').format(Math.round(wolf * 10) / 10)
-                const endermanFormated = new Intl.NumberFormat('en-US').format(Math.round(enderman * 10) / 10)
+                const revFormated = formatNum(rev)
+                const taraFormated = formatNum(tara)
+                const wolfFormated = formatNum(wolf)
+                const endermanFormated = formatNum(enderman)
 
-                const dungeonFormated = new Intl.NumberFormat('en-US').format(Math.round(dw * 10) / 10)
-                const slayerFormated = new Intl.NumberFormat('en-US').format(Math.round(slw * 10) / 10)
-                const skillFormated = new Intl.NumberFormat('en-US').format(Math.round(skillWeightt * 10) / 10)
+                const dungeonFormated = formatNum(dw)
+                const slayerFormated = formatNum(slw)
+                const skillFormated = formatNum(skillWeightt)
 
 
                 //create and send embed 

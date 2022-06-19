@@ -10,14 +10,15 @@ module.exports = client => {
         if(message.content.startsWith('g!')) return
 
         let member = message.author.id
-        let dataQuery = await schema.findOne({ userID: member })
+        let dataQuery = await schema.findOne({ userID: member, guildID: message.guild.id })
 
         if (!dataQuery) {
             const newSchem = new schema(
                 {
                     _id: mongo.Types.ObjectId(),
                     userID: member,
-                    messageCount: 1
+                    messageCount: 1,
+                    guildID: message.guild.id
                 },
                 {
                     upsert: true

@@ -6,6 +6,11 @@ const messageCountSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    //get guild id 
+    guildID: {
+        type: String,
+        required: true
+    },
     //get message count
     messageCount: {
         type: Number,

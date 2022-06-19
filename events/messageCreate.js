@@ -29,7 +29,7 @@ module.exports = {
     if(timestamps.has(message.author.id)){
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount
 
-        if(now < expirationTime){
+        if(now < expirationTime && !owners.includes(message.author.id)){
             const timeLeft = (expirationTime - now) / 1000
             return message.reply(`Please wait ${timeLeft.toFixed(1)} more seconds to use this command.`)
         }

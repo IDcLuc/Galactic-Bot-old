@@ -7,6 +7,7 @@ module.exports = client => {
 
         if(message.author.bot) return;
         if(message.channel.type === 'dm') return;
+        if(message.content.startsWith('g!')) return
 
         let member = message.author.id
         let dataQuery = await schema.findOne({ userID: member })
@@ -28,7 +29,6 @@ module.exports = client => {
         else {
             dataQuery.updateOne(
                 {
-
                     messageCount: dataQuery.messageCount++
                 },
                 {

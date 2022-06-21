@@ -1,10 +1,7 @@
 const Canvas = require('canvas');
 const Discord = require('discord.js');
 
-const backgrounds = {
-    bedwars: "https://cdn.discordapp.com/attachments/632590539379834887/977203526864371802/unknown.png",
-    welcome: "https://cdn.discordapp.com/attachments/632590539379834887/977205911250677780/unknown.png"
-};
+const background = "https://cdn.discordapp.com/attachments/632590539379834887/977205911250677780/unknown.png"
 
 const dim = {
     height: 1080,
@@ -26,7 +23,7 @@ const WelcomeImg = async (member) => {
     const ctx = canvas.getContext('2d')
 
     //draw in background
-    const backimg = await Canvas.loadImage(backgrounds.welcome)
+    const backimg = await Canvas.loadImage(background)
     ctx.drawImage(backimg, 0, 0)
 
     //draw black box

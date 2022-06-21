@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 require("dotenv").config()
-const imageGenerator = require('./imageGenerator')
+const imageGenerator = require("./welcomeImage")
 const mongoose = require("mongoose")
 const messageCount = require("./message-counter.js")
 

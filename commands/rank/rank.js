@@ -12,6 +12,11 @@ module.exports = {
     permissions: [],
     devOnly: false,
     run: async ({client, message, args}) => {
+        // var member;
+        // if (args[0]){
+        //     if (message.mentions.members.first() && args[0] == message.mentions.members.first())
+        //         member = message.mentions.members.first()
+        // }
         var member = message.mentions.members.first() ? message.mentions.members.first() : !args[0] ? message.member : message.guild.members.cache.has(args[0]) ? message.guild.members.cache.get(args[0]) : message.member
         var img = member.user.displayAvatarURL({format: "png", dynamic: true, size: 512})
 
@@ -23,21 +28,17 @@ module.exports = {
                 return num >= min && num < max;
             } 
             for (let index in levelRequirements) {
-                const percentage = (msgcount / levelRequirements[index]) * 100
-                const percentageRounded = Math.round(percentage)
-                
-                if(between(msgcount, levelRequirements[index], levelRequirements[++index])) {
+                while(between(msgcount, levelRequirements[index], levelRequirements[++index])) {
                     let level = index
-                    const nextLevel = ++level
-                    const nextLevelRequirement = levelRequirements[nextLevel]
-                    const card = await rankCard(member, level, msgcount, nextLevelRequirement, percentageRounded)
-                    message.reply({content: `ur level ${level}`, files: [card]})
+                    const nextLevel = levelRequirements[++index]
+                    const card = await rankCard(member, level, msgcount, nextLevel)
+                    message.reply({ files: [card] })
                 }
             }
         }
         else if (!dataQuery) {
-            const lvl0card = await rankCard(member, 0, 0, 10, 0)
-            message.reply({content: `${member} level ${0}`, files: [lvl0card]})
+            const lvl0card = await rankCard(member, 0, 0, 10)
+            message.reply({ files: [lvl0card] })
         }
 
     } 

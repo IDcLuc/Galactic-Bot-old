@@ -10,9 +10,11 @@ const av = {
     x: 100,
     y: 99
 }
+const color = Math.random() < 0.5 ? "lime" : "brown"
 const backgroundImage = "https://i.imgur.com/VLJjnfF.png"
 
-const RankCard = async (member, lvl, msgcount, msgneeded, percentage) => {
+const RankCard = async (member, lvl, msgcount, msgneeded) => {
+    let percentage = Math.floor((msgcount / msgneeded) * 100)
     let username = member.user.username
     let discrim = member.user.discriminator
     
@@ -57,7 +59,13 @@ const RankCard = async (member, lvl, msgcount, msgneeded, percentage) => {
     ctx.textAlign = "left"
     ctx.font = "115px FORQUE"
     ctx.fillText(`${lvl}`, 1775, 173)
-
+    for(let i = 0; i < percentage; i++)  {
+        ctx.beginPath()
+        ctx.lineWidth = 81
+        ctx.fillStyle = color
+        ctx.arc(568 + (i * 12.14), 406, 39, 0, Math.PI * 2, true)
+        ctx.fill()
+    }
     return new Discord.MessageAttachment(canvas.toBuffer(), `${username}#${discrim}.png`)
 }
 

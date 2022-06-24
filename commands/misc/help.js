@@ -18,7 +18,8 @@ module.exports = {
                     { name: "Moderation", value: "kick, ban, mute"},
                     { name: "Fun", value: "confirmbald"},
                     { name: "Search", value: "namemc, skycrypt"},
-                    { name: "Stats", value: "bedwars, skywars, skills, weight"}
+                    { name: "Stats", value: "bedwars, skywars, skills, weight"},
+                    { name: 'Rank', value: 'rank'}
                 )
                 .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL()})
                 

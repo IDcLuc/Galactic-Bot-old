@@ -12,12 +12,7 @@ module.exports = {
     permissions: [],
     devOnly: false,
     run: async ({client, message, args}) => {
-        // var member;
-        // if (args[0]){
-        //     if (message.mentions.members.first() && args[0] == message.mentions.members.first())
-        //         member = message.mentions.members.first()
-        // }
-        var member = message.mentions.members.first() ? message.mentions.members.first() : !args[0] ? message.member : message.guild.members.cache.has(args[0]) ? message.guild.members.cache.get(args[0]) : message.member
+        var member = message.mentions.members.first() ? message.mentions.members.first() : !args[0] ? message.member : message.guild.members.cache.has(`${args[0]}`) ? message.guild.members.cache.get(`${args[0]}`) : message.member
         var img = member.user.displayAvatarURL({format: "png", dynamic: true, size: 512})
 
         const dataQuery = await schema.findOne({ userID: member.id, guildID: message.guild.id })

@@ -11,7 +11,7 @@ const av = {
     y: 99
 }
 const color = Math.random() < 0.5 ? "lime" : "brown"
-const backgroundImage = "https://i.imgur.com/yoQfxZu.png" // https://i.imgur.com/b47pmxo.png
+const backgroundImage = "https://i.imgur.com/8iAnjlv.png"
 
 const RankCard = async (member, lvl, msgcount, msgneeded) => {
     let percentage = Math.floor((msgcount / msgneeded) * 100)

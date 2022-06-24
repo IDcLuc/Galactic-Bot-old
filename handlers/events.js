@@ -12,7 +12,7 @@ module.exports = (bot, reload) => {
 
     events.forEach((f, i) => {
         if (reload)
-            delete require.cache[require.resolve(`../events${f}`)]
+            delete require.cache[require.resolve(`../events/${f}`)]
         const event = require(`../events/${f}`)
         client.events.set(event.name, event)
         

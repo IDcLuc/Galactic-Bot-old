@@ -18,10 +18,11 @@ const RankCard = async (member, lvl, msgcount, msgneeded) => {
     let username = member.user.username
     let discrim = member.user.discriminator
     
+    //create canvas context
     const canvas = Canvas.createCanvas(dim.width, dim.height)
     const ctx = canvas.getContext('2d')
 
-    //draw in background
+    //draw background
     const backimg = await Canvas.loadImage(backgroundImage)
     ctx.drawImage(backimg, 0, 0)
 
@@ -59,6 +60,8 @@ const RankCard = async (member, lvl, msgcount, msgneeded) => {
     ctx.textAlign = "left"
     ctx.font = "115px FORQUE"
     ctx.fillText(`${lvl}`, 1775, 173)
+
+    //draw progress bar
     for(let i = 0; i < percentage; i++)  {
         ctx.beginPath()
         ctx.lineWidth = 81
@@ -66,6 +69,14 @@ const RankCard = async (member, lvl, msgcount, msgneeded) => {
         ctx.arc(568 + (i * 12.14), 406, 39, 0, Math.PI * 2, true)
         ctx.fill()
     }
+
+    //type username and discriminator
+    ctx.fillStyle = "white"
+    ctx.textAlign = "left"
+    ctx.font = "84px FORQUE"
+    ctx.fillText(`${username}#${discrim}`, 550, 333)
+
+    //export image
     return new Discord.MessageAttachment(canvas.toBuffer(), `${username}#${discrim}.png`)
 }
 

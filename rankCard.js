@@ -10,7 +10,7 @@ const av = {
     x: 100,
     y: 99
 }
-const color = Math.random() < 0.5 ? "lime" : "brown"
+const color = Math.random() < 0.5 ? "#059033" : "#4c3228"
 const backgroundImage = "https://i.imgur.com/8iAnjlv.png"
 
 const RankCard = async (member, lvl, msgcount, msgneeded) => {
@@ -73,7 +73,7 @@ const RankCard = async (member, lvl, msgcount, msgneeded) => {
     //type username and discriminator
     ctx.fillStyle = "white"
     ctx.textAlign = "left"
-    ctx.font = "84px FORQUE"
+    ctx.font = "88px FORQUE"
     ctx.fillText(`${username}#${discrim}`, 550, 333)
 
     //export image

@@ -9,8 +9,8 @@ module.exports = {
     devOnly: false,
     run: async ({client, message, args}) => {
         if (!args[0]){
-        let embede = new MessageEmbed()
-        embede 
+        let embed = new MessageEmbed()
+        embed
             .setTitle("Mute")
             .setDescription("Mute a member from the discord server.")
             .setColor("#863b87")
@@ -19,7 +19,7 @@ module.exports = {
                 { name: "Example", value: "g!mute <@453943223229087748> Excessive usage of bad words"}
             )
             .setFooter({ text: `Galactic Bot ● Requested by ${message.author.tag}`, iconURL: client.user.displayAvatarURL()})
-        return message.reply({ embeds: [embede] })
+        return message.reply({ embeds: [embed] })
         }
 
         let mention = args[0].match(MessageMentions.USER_PATTERN)
@@ -29,7 +29,7 @@ module.exports = {
 
         let reasonn = args.slice(1).join(" ")
         let member = message.mentions.members.first()
-        let role = message.guild.roles.cache.find(r => r.id === "955549898395222108");
+        let role = message.guild.roles.cache.find(r => r.name === "Muted");
 
         if(member.permissions.has(Permissions.FLAGS.KICK_MEMBERS) && !member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)){
             return message.reply(`You can't mute \`\`${member.user.username}\`\` as they have kick permissions.`)
@@ -52,3 +52,5 @@ module.exports = {
         }
     }
 }
+
+

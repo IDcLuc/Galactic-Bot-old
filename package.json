@@ -1,26 +1,29 @@
 {
-  "name": "galacticbot",
+  "name": "galactic-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Galactic bot something idk",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LUCATIVIOMAD2/Galactic-Bot.git"
+  },
+  "author": "Luc",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LUCATIVIOMAD2/Galactic-Bot/issues"
+  },
+  "homepage": "https://github.com/LUCATIVIOMAD2/Galactic-Bot#readme",
   "dependencies": {
     "canvas": "^2.9.3",
     "discord.js": "^13.8.1",
     "dotenv": "^16.0.1",
-    "glob-parent": "^6.0.2",
     "hypixel-api-reborn": "^10.0.0",
     "mongoose": "^6.4.1",
     "ms": "^2.1.3",
-    "node-fetch": "^3.2.6",
-    "npm": "^8.7.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.18"
+    "node-fetch": "^2.6.1",
+    "npm": "^8.13.1"
   }
 }

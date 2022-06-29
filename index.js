@@ -18,7 +18,7 @@ let bot = {
     owners: ["495514555615543329"]
 }
 
-const welcomeChannelId = "913098493315412028" || '986310622876676136'
+const welcomeChannelId = '986310622876676136'
 
 client.on("guildMemberAdd", async (member) => {               
     const img = await imageGenerator(member)

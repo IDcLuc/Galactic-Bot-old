@@ -32,18 +32,17 @@ module.exports = {
         
 
         let reason = args.slice(1).join(" ")
-        let memberr = message.mentions.members.first()
     
         try {
             if(args[1])
-            await memberr.send(`You have been banned from **${message.guild.name}** for *\`\`${reason}\`\`*!`)
+            await member.send(`You have been banned from **${message.guild.name}** for *\`\`${reason}\`\`*!`)
             else if(!args[1])
-            await memberr.send(`You have been banned from **${message.guild.name}**!`)
+            await member.send(`You have been banned from **${message.guild.name}**!`)
             await member.ban({reason: reason})
             if(args[1])
-            message.reply("<@" + memberr + "> has been banned for ``" + reason +"``.")
+            message.reply("<@" + member + "> has been banned for ``" + reason +"``.")
             if(!args[1])
-            message.reply("<@" + memberr + "> has been banned.")
+            message.reply("<@" + member + "> has been banned.")
         }
         catch (err) {
             console.log (err)
